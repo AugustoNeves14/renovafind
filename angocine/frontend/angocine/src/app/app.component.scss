@@ -1,0 +1,10 @@
+// App component specific styles
+.main-content {
+  min-height: calc(100vh - 76px - 300px); // Viewport height minus navbar and footer
+  padding-bottom: 2rem;
+}
+
+// Footer specific styles
+.footer {
+  margin-top: 3rem;
+}

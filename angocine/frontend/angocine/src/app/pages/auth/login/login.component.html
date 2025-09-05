@@ -1,0 +1,80 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1 class="auth-title">Entrar</h1>
+        <p class="auth-subtitle">Acesse sua conta para continuar</p>
+      </div>
+      
+      <div class="auth-body">
+        <!-- Error Alert -->
+        <div *ngIf="error" class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-circle me-2"></i>
+          {{ error }}
+        </div>
+        
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                formControlName="email" 
+                placeholder="seu@email.com"
+                [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+            </div>
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="invalid-feedback">
+              <span *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório.</span>
+              <span *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido.</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <label for="password" class="form-label">Senha</label>
+              <a routerLink="/auth/forgot-password" class="form-text">Esqueceu a senha?</a>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                formControlName="password" 
+                placeholder="Sua senha"
+                [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+            </div>
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+              <span *ngIf="loginForm.get('password')?.errors?.['required']">Senha é obrigatória.</span>
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Senha deve ter pelo menos 6 caracteres.</span>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2 mt-4">
+            <button 
+              type="submit" 
+              class="btn btn-primary btn-lg" 
+              [disabled]="loginForm.invalid || isSubmitting">
+              <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"></span>
+              Entrar
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="auth-footer">
+        <p>Não tem uma conta? <a routerLink="/auth/register">Cadastre-se</a></p>
+      </div>
+    </div>
+    
+    <div class="auth-brand">
+      <a routerLink="/" class="brand-link">AngoCine</a>
+      <p class="brand-tagline">A melhor plataforma de streaming</p>
+    </div>
+  </div>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>

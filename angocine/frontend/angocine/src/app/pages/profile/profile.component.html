@@ -1,0 +1,435 @@
+<div class="profile-page">
+  <div class="container">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Carregando perfil...</p>
+    </div>
+    
+    <!-- Error State -->
+    <div *ngIf="error" class="error-container">
+      <div class="alert alert-danger" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        {{ error }}
+      </div>
+      <button class="btn btn-primary mt-3" routerLink="/">Voltar para Home</button>
+    </div>
+    
+    <!-- Profile Content -->
+    <div *ngIf="!isLoading && !error && currentUser" class="profile-content">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h1 class="profile-title">Minha Conta</h1>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <!-- Current Profile Selector -->
+            <div class="current-profile" *ngIf="currentProfile" (click)="openProfileSelector()">
+              <img [src]="currentProfile.avatar" [alt]="currentProfile.name" class="profile-avatar">
+              <div class="profile-info">
+                <span class="profile-name">{{ currentProfile.name }}</span>
+                <span class="profile-switch">Trocar Perfil <i class="fas fa-chevron-down"></i></span>
+              </div>
+            </div>
+            
+            <!-- No Profile Selected -->
+            <div class="no-profile" *ngIf="!currentProfile">
+              <button class="btn btn-primary" (click)="openProfileSelector()">
+                <i class="fas fa-user-circle me-2"></i> Selecionar Perfil
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Profile Navigation -->
+      <ul class="nav nav-tabs profile-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'profile'" (click)="setActiveTab('profile')">
+            <i class="fas fa-user me-2"></i> Perfil
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'watchlist'" (click)="setActiveTab('watchlist')">
+            <i class="fas fa-bookmark me-2"></i> Minha Lista
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'history'" (click)="setActiveTab('history')">
+            <i class="fas fa-history me-2"></i> Histórico
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'profiles'" (click)="setActiveTab('profiles')">
+            <i class="fas fa-users me-2"></i> Perfis
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'settings'" (click)="setActiveTab('settings')">
+            <i class="fas fa-cog me-2"></i> Configurações
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Profile Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'profile'" [class.active]="activeTab === 'profile'">
+          <div class="profile-section">
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <div class="profile-card">
+                  <div class="profile-card-header">
+                    <h3>Informações da Conta</h3>
+                  </div>
+                  <div class="profile-card-body">
+                    <div class="profile-info-item">
+                      <span class="info-label">Nome de Usuário:</span>
+                      <span class="info-value">{{ currentUser.username }}</span>
+                    </div>
+                    <div class="profile-info-item">
+                      <span class="info-label">Email:</span>
+                      <span class="info-value">{{ currentUser.email }}</span>
+                    </div>
+                    <div class="profile-info-item">
+                      <span class="info-label">Tipo de Conta:</span>
+                      <span class="info-value">{{ currentUser.role === 'admin' ? 'Administrador' : 'Usuário' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-8">
+                <div class="profile-card">
+                  <div class="profile-card-header">
+                    <h3>Perfil Atual</h3>
+                  </div>
+                  <div class="profile-card-body">
+                    <!-- No Profile Selected -->
+                    <div *ngIf="!currentProfile" class="no-profile-selected">
+                      <p>Você ainda não selecionou um perfil.</p>
+                      <button class="btn btn-primary" (click)="openProfileSelector()">
+                        Selecionar Perfil
+                      </button>
+                    </div>
+                    
+                    <!-- Current Profile -->
+                    <div *ngIf="currentProfile" class="current-profile-details">
+                      <div class="profile-avatar-large">
+                        <img [src]="currentProfile.avatar" [alt]="currentProfile.name">
+                      </div>
+                      <div class="profile-details">
+                        <h4>{{ currentProfile.name }}</h4>
+                        <span class="profile-badge" *ngIf="currentProfile.is_kid">Infantil</span>
+                        <button class="btn btn-outline-primary mt-3" (click)="openProfileSelector()">
+                          Trocar Perfil
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Watchlist Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'watchlist'" [class.active]="activeTab === 'watchlist'">
+          <div class="profile-section">
+            <h2 class="section-title">Minha Lista</h2>
+            
+            <!-- Loading State -->
+            <div *ngIf="isLoadingWatchlist" class="loading-container">
+              <div class="spinner"></div>
+              <p>Carregando lista...</p>
+            </div>
+            
+            <!-- No Profile Selected -->
+            <div *ngIf="!currentProfile && !isLoadingWatchlist" class="no-profile-selected">
+              <p>Selecione um perfil para ver sua lista de filmes.</p>
+              <button class="btn btn-primary" (click)="openProfileSelector()">
+                Selecionar Perfil
+              </button>
+            </div>
+            
+            <!-- Empty Watchlist -->
+            <div *ngIf="currentProfile && !isLoadingWatchlist && watchlist.length === 0" class="empty-state">
+              <i class="fas fa-bookmark"></i>
+              <h3>Sua lista está vazia</h3>
+              <p>Adicione filmes à sua lista para assistir mais tarde.</p>
+              <button class="btn btn-primary" routerLink="/browse">
+                Explorar Catálogo
+              </button>
+            </div>
+            
+            <!-- Watchlist Movies -->
+            <div *ngIf="currentProfile && !isLoadingWatchlist && watchlist.length > 0" class="movies-grid">
+              <div *ngFor="let item of watchlist" class="movie-item">
+                <app-movie-card [movie]="item"></app-movie-card>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- History Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'history'" [class.active]="activeTab === 'history'">
+          <div class="profile-section">
+            <h2 class="section-title">Histórico de Visualização</h2>
+            
+            <!-- Loading State -->
+            <div *ngIf="isLoadingHistory" class="loading-container">
+              <div class="spinner"></div>
+              <p>Carregando histórico...</p>
+            </div>
+            
+            <!-- No Profile Selected -->
+            <div *ngIf="!currentProfile && !isLoadingHistory" class="no-profile-selected">
+              <p>Selecione um perfil para ver seu histórico de visualização.</p>
+              <button class="btn btn-primary" (click)="openProfileSelector()">
+                Selecionar Perfil
+              </button>
+            </div>
+            
+            <!-- Empty History -->
+            <div *ngIf="currentProfile && !isLoadingHistory && watchHistory.length === 0" class="empty-state">
+              <i class="fas fa-history"></i>
+              <h3>Seu histórico está vazio</h3>
+              <p>Assista a filmes para construir seu histórico de visualização.</p>
+              <button class="btn btn-primary" routerLink="/browse">
+                Explorar Catálogo
+              </button>
+            </div>
+            
+            <!-- History Items -->
+            <div *ngIf="currentProfile && !isLoadingHistory && watchHistory.length > 0" class="history-list">
+              <div *ngFor="let item of watchHistory" class="history-item">
+                <div class="history-poster">
+                  <img [src]="item.poster_url" [alt]="item.title">
+                </div>
+                <div class="history-details">
+                  <h4 class="history-title">{{ item.title }}</h4>
+                  <div class="history-meta">
+                    <span class="history-year">{{ item.release_year }}</span>
+                    <span class="history-date">Assistido em: {{ item.last_watched | date:'dd/MM/yyyy' }}</span>
+                  </div>
+                  <div class="history-progress">
+                    <div class="progress-label">
+                      <span>Progresso: {{ item.progress }}%</span>
+                      <span *ngIf="item.completed" class="completed-badge">Concluído</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" [style.width.%]="item.progress"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="history-actions">
+                  <a [routerLink]="['/watch', item.movie_id]" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                  </a>
+                  <a [routerLink]="['/movie', item.movie_id]" class="btn btn-outline-secondary">
+                    <i class="fas fa-info-circle"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Profiles Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'profiles'" [class.active]="activeTab === 'profiles'">
+          <div class="profile-section">
+            <div class="section-header">
+              <h2 class="section-title">Gerenciar Perfis</h2>
+              <button *ngIf="profiles.length < 5" class="btn btn-primary" (click)="openAddProfileForm()">
+                <i class="fas fa-plus me-2"></i> Novo Perfil
+              </button>
+            </div>
+            
+            <!-- Profiles List -->
+            <div class="profiles-grid">
+              <div *ngFor="let profile of profiles" class="profile-manage-item">
+                <div class="profile-avatar-wrapper" [class.active]="currentProfile?.id === profile.id">
+                  <img [src]="profile.avatar" [alt]="profile.name" class="profile-avatar">
+                  <div class="profile-avatar-overlay" *ngIf="currentProfile?.id === profile.id">
+                    <i class="fas fa-check"></i>
+                  </div>
+                </div>
+                <h4 class="profile-name">{{ profile.name }}</h4>
+                <span class="profile-badge" *ngIf="profile.is_kid">Infantil</span>
+                <div class="profile-actions">
+                  <button class="btn btn-sm btn-primary" (click)="selectProfile(profile)">
+                    <i class="fas fa-user-check"></i> Selecionar
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary" (click)="openEditProfileForm(profile)">
+                    <i class="fas fa-edit"></i> Editar
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteProfile(profile)">
+                    <i class="fas fa-trash-alt"></i> Excluir
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'settings'" [class.active]="activeTab === 'settings'">
+          <div class="profile-section">
+            <h2 class="section-title">Configurações da Conta</h2>
+            
+            <!-- Account Settings Form -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <h3>Informações Pessoais</h3>
+              </div>
+              <div class="settings-card-body">
+                <form [formGroup]="userForm" (ngSubmit)="updateUserProfile()">
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Nome de Usuário</label>
+                    <input type="text" class="form-control" id="username" formControlName="username">
+                    <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched" class="form-error">
+                      Nome de usuário é obrigatório e deve ter pelo menos 3 caracteres.
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                    <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="form-error">
+                      Email inválido.
+                    </div>
+                  </div>
+                  
+                  <div class="password-section">
+                    <h4>Alterar Senha</h4>
+                    <p class="text-muted">Deixe em branco para manter a senha atual.</p>
+                    
+                    <div class="mb-3">
+                      <label for="current_password" class="form-label">Senha Atual</label>
+                      <input type="password" class="form-control" id="current_password" formControlName="current_password">
+                    </div>
+                    
+                    <div class="mb-3">
+                      <label for="new_password" class="form-label">Nova Senha</label>
+                      <input type="password" class="form-control" id="new_password" formControlName="new_password">
+                    </div>
+                    
+                    <div class="mb-3">
+                      <label for="confirm_password" class="form-label">Confirmar Nova Senha</label>
+                      <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password">
+                    </div>
+                  </div>
+                  
+                  <div *ngIf="userUpdateError" class="alert alert-danger">
+                    {{ userUpdateError }}
+                  </div>
+                  
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || isUpdatingUser">
+                      <span *ngIf="isUpdatingUser" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Salvar Alterações
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <!-- Logout Button -->
+            <div class="logout-section">
+              <button class="btn btn-outline-danger" (click)="logout()">
+                <i class="fas fa-sign-out-alt me-2"></i> Sair da Conta
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Profile Selector Modal -->
+  <app-modal *ngIf="showProfileSelector" title="Selecionar Perfil" (closed)="closeProfileSelector()">
+    <app-profile-switcher 
+      [showAddButton]="false" 
+      [showManageButton]="false"
+      (profileSelected)="selectProfile($event)">
+    </app-profile-switcher>
+  </app-modal>
+  
+  <!-- Add Profile Modal -->
+  <app-modal *ngIf="showAddProfileForm" title="Adicionar Perfil" (closed)="closeAddProfileForm()">
+    <form [formGroup]="profileForm" (ngSubmit)="createProfile()">
+      <div class="mb-3">
+        <label for="profileName" class="form-label">Nome do Perfil</label>
+        <input type="text" class="form-control" id="profileName" formControlName="name">
+        <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" class="form-error">
+          Nome do perfil é obrigatório e deve ter pelo menos 2 caracteres.
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="profileAvatar" class="form-label">Avatar (URL)</label>
+        <input type="text" class="form-control" id="profileAvatar" formControlName="avatar">
+        <div class="avatar-preview mt-2">
+          <img [src]="profileForm.get('avatar')?.value" alt="Avatar Preview">
+        </div>
+      </div>
+      
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="isKid" formControlName="is_kid">
+        <label class="form-check-label" for="isKid">Perfil Infantil</label>
+      </div>
+      
+      <div *ngIf="profileUpdateError" class="alert alert-danger">
+        {{ profileUpdateError }}
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeAddProfileForm()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || isCreatingProfile">
+          <span *ngIf="isCreatingProfile" class="spinner-border spinner-border-sm me-2" role="status"></span>
+          Criar Perfil
+        </button>
+      </div>
+    </form>
+  </app-modal>
+  
+  <!-- Edit Profile Modal -->
+  <app-modal *ngIf="showEditProfileForm" title="Editar Perfil" (closed)="closeEditProfileForm()">
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+      <div class="mb-3">
+        <label for="editProfileName" class="form-label">Nome do Perfil</label>
+        <input type="text" class="form-control" id="editProfileName" formControlName="name">
+        <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" class="form-error">
+          Nome do perfil é obrigatório e deve ter pelo menos 2 caracteres.
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="editProfileAvatar" class="form-label">Avatar (URL)</label>
+        <input type="text" class="form-control" id="editProfileAvatar" formControlName="avatar">
+        <div class="avatar-preview mt-2">
+          <img [src]="profileForm.get('avatar')?.value" alt="Avatar Preview">
+        </div>
+      </div>
+      
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="editIsKid" formControlName="is_kid">
+        <label class="form-check-label" for="editIsKid">Perfil Infantil</label>
+      </div>
+      
+      <div *ngIf="profileUpdateError" class="alert alert-danger">
+        {{ profileUpdateError }}
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeEditProfileForm()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || isUpdatingProfile">
+          <span *ngIf="isUpdatingProfile" class="spinner-border spinner-border-sm me-2" role="status"></span>
+          Salvar Alterações
+        </button>
+      </div>
+    </form>
+  </app-modal>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>

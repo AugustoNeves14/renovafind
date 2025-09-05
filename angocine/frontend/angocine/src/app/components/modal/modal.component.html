@@ -1,0 +1,22 @@
+<div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div [class]="getModalClass()" #modalContent>
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header" *ngIf="title">
+        <h5 class="modal-title">{{ title }}</h5>
+        <button *ngIf="showCloseButton" type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+      
+      <!-- Modal Footer (optional) -->
+      <div class="modal-footer" *ngIf="showCloseButton">
+        <ng-content select="[footer]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>

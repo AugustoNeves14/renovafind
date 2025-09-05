@@ -1,0 +1,172 @@
+.browse-page {
+  padding: 2rem 0;
+}
+
+.browse-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.browse-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.browse-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.filters-container {
+  margin-bottom: 2rem;
+}
+
+// Loading and Error States
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  
+  p {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 106, 0, 0.1);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-container {
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .alert {
+    width: 100%;
+  }
+}
+
+// Results
+.results-container {
+  min-height: 300px;
+}
+
+.results-count {
+  margin-bottom: 1.5rem;
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+// No Results
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  
+  i {
+    font-size: 3rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: var(--text-secondary);
+    max-width: 400px;
+  }
+}
+
+// Movies Grid
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+}
+
+.movie-item {
+  height: 100%;
+}
+
+// Pagination
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  
+  ::ng-deep .pagination {
+    margin-bottom: 0;
+    
+    .page-item {
+      .page-link {
+        background-color: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+        
+        &:hover {
+          background-color: var(--bg-tertiary);
+          border-color: var(--border-color);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--white);
+      }
+      
+      &.disabled .page-link {
+        background-color: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-tertiary);
+      }
+    }
+  }
+}

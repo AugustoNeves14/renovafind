@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': 'Let\'s create the environment files for our Angular application:\n\n<function_calls>\n<create-file file_path="angocine/frontend/angocine/src/environments/environment.ts">\nexport const environment = {\n  production: false,\n  apiUrl: \'http://localhost:3000/api\'\n};\n</create-file>\n</function_calls>'}

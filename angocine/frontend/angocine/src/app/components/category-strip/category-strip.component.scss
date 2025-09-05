@@ -1,0 +1,125 @@
+.category-strip {
+  margin-bottom: 3rem;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  position: relative;
+  padding-left: 1rem;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+  }
+}
+
+.see-all {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  
+  i {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover {
+    color: var(--primary-color);
+    
+    i {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.category-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--bg-secondary);
+  
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+  }
+}
+
+.movie-wrapper {
+  flex: 0 0 auto;
+  
+  // Card sizes
+  width: 180px;
+  
+  &:has(app-movie-card.small) {
+    width: 140px;
+  }
+  
+  &:has(app-movie-card.large) {
+    width: 220px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .movie-wrapper {
+    width: 160px;
+    
+    &:has(app-movie-card.small) {
+      width: 120px;
+    }
+    
+    &:has(app-movie-card.large) {
+      width: 200px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .category-title {
+    font-size: 1.25rem;
+  }
+  
+  .movie-wrapper {
+    width: 140px;
+    
+    &:has(app-movie-card.small) {
+      width: 100px;
+    }
+    
+    &:has(app-movie-card.large) {
+      width: 180px;
+    }
+  }
+}

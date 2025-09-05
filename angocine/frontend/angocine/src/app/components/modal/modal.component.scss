@@ -1,0 +1,133 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-index-modal);
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 500px; // Default medium size
+  margin: 0;
+  animation: zoomIn 0.3s ease;
+  
+  &.modal-sm {
+    max-width: 300px;
+  }
+  
+  &.modal-lg {
+    max-width: 800px;
+  }
+  
+  &.modal-xl {
+    max-width: 1140px;
+  }
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  
+  .modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--text-secondary);
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    &::before {
+      content: '×';
+    }
+  }
+}
+
+.modal-body {
+  padding: 1.5rem;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 576px) {
+  .modal-dialog {
+    max-width: 100%;
+    margin: 0.5rem;
+  }
+  
+  .modal-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+    max-height: calc(100vh - 150px);
+  }
+  
+  .modal-footer {
+    padding: 0.75rem 1rem;
+  }
+}

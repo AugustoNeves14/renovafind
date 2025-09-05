@@ -1,0 +1,49 @@
+<div class="watch-page">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando filme...</p>
+  </div>
+  
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <div class="alert alert-danger" role="alert">
+      <i class="fas fa-exclamation-circle me-2"></i>
+      {{ error }}
+    </div>
+    <button class="btn btn-primary mt-3" (click)="goBack()">Voltar</button>
+  </div>
+  
+  <!-- Video Player -->
+  <div *ngIf="!isLoading && !error && movie" class="video-container">
+    <div class="back-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    
+    <app-video-player
+      [videoUrl]="getVideoUrl()"
+      [poster]="getPosterUrl()"
+      [title]="movie.title"
+      [autoplay]="true"
+      (timeUpdate)="onTimeUpdate($event)"
+      (videoEnded)="onVideoEnded()"
+      (videoStarted)="onVideoStarted()">
+    </app-video-player>
+    
+    <!-- Movie Info -->
+    <div class="movie-info">
+      <h1 class="movie-title">{{ movie.title }}</h1>
+      <div class="movie-meta">
+        <span class="movie-year" *ngIf="movie.release_year">{{ movie.release_year }}</span>
+        <span class="movie-duration" *ngIf="movie.duration">
+          {{ movie.duration }} min
+        </span>
+        <span class="movie-rating" *ngIf="movie.rating">
+          <i class="fas fa-star"></i> {{ movie.rating }}
+        </span>
+      </div>
+      <p class="movie-description">{{ movie.description }}</p>
+    </div>
+  </div>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>

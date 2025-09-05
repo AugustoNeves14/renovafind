@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': "Now I'll initialize the Angular frontend project. Let's install Angular CLI first and create our Angular application:\n\n<function_calls>\n<execute-command>\ncd angocine/frontend && npm init -y && npm install @angular/cli\n</execute-command>\n</function_calls>"}

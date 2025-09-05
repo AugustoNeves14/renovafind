@@ -1,0 +1,1 @@
+{'role': 'assistant', 'content': "Now I'll set up the Node.js backend with Express:\n\n<function_calls>\n<execute-command>\ncd angocine/backend && npm init -y && npm install express cors dotenv jsonwebtoken bcryptjs pg sqlite3 helmet morgan\n</execute-command>\n</function_calls>"}

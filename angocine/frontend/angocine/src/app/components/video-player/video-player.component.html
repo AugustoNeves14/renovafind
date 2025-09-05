@@ -1,0 +1,126 @@
+<div class="video-player-container" (mousemove)="onMouseMove()">
+  <!-- Video Element -->
+  <video #videoPlayer class="video-player" [poster]="poster" preload="auto" (click)="togglePlay()">
+    Your browser does not support HTML5 video.
+  </video>
+  
+  <!-- Loading Spinner -->
+  <div class="loading-spinner" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+  
+  <!-- Big Play Button (shown when video is paused) -->
+  <div class="big-play-button" *ngIf="!isPlaying && !isLoading" (click)="togglePlay()">
+    <i class="fas fa-play"></i>
+  </div>
+  
+  <!-- Video Title -->
+  <div class="video-title" [ngClass]="{'show': showControls}">
+    {{ title }}
+  </div>
+  
+  <!-- Video Controls -->
+  <div class="video-controls" [ngClass]="{'show': showControls}">
+    <!-- Progress Bar -->
+    <div class="progress-container" (click)="seekByClick($event)">
+      <div class="progress-bar">
+        <div class="progress-buffered" [style.width.%]="getBufferedPercent()"></div>
+        <div class="progress-current" [style.width.%]="getCurrentPercent()"></div>
+      </div>
+      <input type="range" class="progress-seek" min="0" [max]="duration" [value]="currentTime" step="0.1" (input)="seek($event)">
+    </div>
+    
+    <div class="controls-row">
+      <!-- Left Controls -->
+      <div class="controls-left">
+        <!-- Play/Pause Button -->
+        <button class="control-button" (click)="togglePlay()" [attr.aria-label]="isPlaying ? 'Pause' : 'Play'">
+          <i class="fas" [ngClass]="isPlaying ? 'fa-pause' : 'fa-play'"></i>
+        </button>
+        
+        <!-- Rewind Button -->
+        <button class="control-button" (click)="rewind10()" aria-label="Rewind 10 seconds">
+          <i class="fas fa-undo-alt"></i>
+          <span class="control-text">10</span>
+        </button>
+        
+        <!-- Forward Button -->
+        <button class="control-button" (click)="forward10()" aria-label="Forward 10 seconds">
+          <i class="fas fa-redo-alt"></i>
+          <span class="control-text">10</span>
+        </button>
+        
+        <!-- Volume Controls -->
+        <div class="volume-container">
+          <button class="control-button" (click)="toggleMute()" [attr.aria-label]="isMuted ? 'Unmute' : 'Mute'">
+            <i class="fas" [ngClass]="{
+              'fa-volume-mute': isMuted || volume === 0,
+              'fa-volume-down': !isMuted && volume > 0 && volume < 0.5,
+              'fa-volume-up': !isMuted && volume >= 0.5
+            }"></i>
+          </button>
+          <div class="volume-slider-container">
+            <input type="range" class="volume-slider" min="0" max="1" step="0.05" [value]="volume" (input)="setVolume($event)">
+          </div>
+        </div>
+        
+        <!-- Time Display -->
+        <div class="time-display">
+          <span>{{ formatTime(currentTime) }}</span>
+          <span class="time-separator">/</span>
+          <span>{{ formatTime(duration) }}</span>
+        </div>
+      </div>
+      
+      <!-- Right Controls -->
+      <div class="controls-right">
+        <!-- Settings Button -->
+        <div class="settings-container">
+          <button class="control-button" (click)="toggleSettings()" aria-label="Settings">
+            <i class="fas fa-cog" [ngClass]="{'rotate': showSettings}"></i>
+          </button>
+          
+          <!-- Settings Menu -->
+          <div class="settings-menu" *ngIf="showSettings">
+            <!-- Playback Speed -->
+            <div class="settings-section">
+              <div class="settings-header">Velocidade</div>
+              <div class="settings-options">
+                <button *ngFor="let rate of playbackRates" 
+                        class="settings-option" 
+                        [ngClass]="{'active': rate === currentPlaybackRate}"
+                        (click)="setPlaybackRate(rate)">
+                  {{ rate === 1 ? 'Normal' : rate + 'x' }}
+                </button>
+              </div>
+            </div>
+            
+            <!-- Quality -->
+            <div class="settings-section">
+              <div class="settings-header">Qualidade</div>
+              <div class="settings-options">
+                <button *ngFor="let quality of qualities" 
+                        class="settings-option" 
+                        [ngClass]="{'active': quality === currentQuality}"
+                        (click)="setQuality(quality)">
+                  {{ quality }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Picture-in-Picture Button -->
+        <button class="control-button" (click)="togglePictureInPicture()" aria-label="Picture-in-Picture">
+          <i class="fas" [ngClass]="isPipActive ? 'fa-compress' : 'fa-external-link-alt'"></i>
+        </button>
+        
+        <!-- Fullscreen Button -->
+        <button class="control-button" (click)="toggleFullscreen()" aria-label="Fullscreen">
+          <i class="fas" [ngClass]="isFullscreen ? 'fa-compress' : 'fa-expand'"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>

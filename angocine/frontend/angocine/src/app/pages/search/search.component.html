@@ -1,0 +1,90 @@
+<div class="search-page">
+  <div class="container">
+    <div class="search-header">
+      <h1 class="search-title">Busca</h1>
+      
+      <!-- Search Form -->
+      <div class="search-form">
+        <form (ngSubmit)="onSearch()">
+          <div class="input-group">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Buscar filmes por título, diretor, elenco..." 
+              [(ngModel)]="searchQuery" 
+              name="searchQuery"
+              autofocus>
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i> Buscar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Search Results -->
+    <div class="search-results" *ngIf="searchQuery">
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Buscando filmes...</p>
+      </div>
+      
+      <!-- Error State -->
+      <div *ngIf="error" class="error-container">
+        <div class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-circle me-2"></i>
+          {{ error }}
+        </div>
+      </div>
+      
+      <!-- Results -->
+      <div *ngIf="!isLoading && !error">
+        <!-- Results Count -->
+        <div class="results-count">
+          <p>{{ totalMovies }} resultados para "{{ searchQuery }}"</p>
+        </div>
+        
+        <!-- No Results -->
+        <div *ngIf="movies.length === 0" class="no-results">
+          <i class="fas fa-search"></i>
+          <h3>Nenhum resultado encontrado</h3>
+          <p>Não encontramos nenhum filme correspondente à sua busca. Tente termos diferentes ou mais gerais.</p>
+        </div>
+        
+        <!-- Movies Grid -->
+        <div *ngIf="movies.length > 0" class="movies-grid">
+          <div *ngFor="let movie of movies" class="movie-item">
+            <app-movie-card [movie]="movie"></app-movie-card>
+          </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div *ngIf="totalMovies > itemsPerPage" class="pagination-container">
+          <pagination 
+            [totalItems]="totalMovies"
+            [itemsPerPage]="itemsPerPage"
+            [(ngModel)]="currentPage"
+            (pageChanged)="onPageChange($event.page)"
+            [maxSize]="5"
+            [boundaryLinks]="true"
+            previousText="&lsaquo;"
+            nextText="&rsaquo;"
+            firstText="&laquo;"
+            lastText="&raquo;">
+          </pagination>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Empty State (No Search Yet) -->
+    <div *ngIf="!searchQuery && !isLoading" class="empty-search">
+      <div class="empty-search-content">
+        <i class="fas fa-search"></i>
+        <h2>O que você quer assistir hoje?</h2>
+        <p>Digite um termo de busca acima para encontrar filmes por título, diretor ou elenco.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>

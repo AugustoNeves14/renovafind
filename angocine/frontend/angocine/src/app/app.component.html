@@ -1,0 +1,71 @@
+<!-- Navbar -->
+<app-navbar *ngIf="showNavbar"></app-navbar>
+
+<!-- Main Content -->
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Footer -->
+<footer class="footer" *ngIf="showNavbar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5 class="footer-title">AngoCine</h5>
+        <p>A plataforma de streaming premium com os melhores filmes e séries para você assistir quando e onde quiser.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-md-2 col-6 mb-4">
+        <h5 class="footer-title">Navegação</h5>
+        <ul class="footer-links">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/browse">Catálogo</a></li>
+          <li><a routerLink="/search">Busca</a></li>
+          <li><a routerLink="/profile">Minha Conta</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-md-2 col-6 mb-4">
+        <h5 class="footer-title">Categorias</h5>
+        <ul class="footer-links">
+          <li><a routerLink="/browse" [queryParams]="{genre: 'Ação'}">Ação</a></li>
+          <li><a routerLink="/browse" [queryParams]="{genre: 'Drama'}">Drama</a></li>
+          <li><a routerLink="/browse" [queryParams]="{genre: 'Comédia'}">Comédia</a></li>
+          <li><a routerLink="/browse" [queryParams]="{genre: 'Ficção Científica'}">Ficção Científica</a></li>
+          <li><a routerLink="/browse" [queryParams]="{genre: 'Terror'}">Terror</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-md-2 col-6 mb-4">
+        <h5 class="footer-title">Suporte</h5>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Privacidade</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-md-2 col-6 mb-4">
+        <h5 class="footer-title">Conta</h5>
+        <ul class="footer-links">
+          <li><a routerLink="/auth/login">Entrar</a></li>
+          <li><a routerLink="/auth/register">Cadastrar</a></li>
+          <li><a routerLink="/profile">Perfil</a></li>
+          <li><a routerLink="/profile">Configurações</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; {{ 2025 }} AngoCine. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
