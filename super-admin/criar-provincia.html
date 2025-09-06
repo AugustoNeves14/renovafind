@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Província - Super Admin - Encontre Aqui</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            <h4><i class="material-icons">admin_panel_settings</i> Super Admin</h4>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link">
+                <i class="material-icons">dashboard</i> Dashboard
+            </a>
+            <a href="criar-provincia.html" class="nav-link active">
+                <i class="material-icons">add_location</i> Criar Províncias
+            </a>
+            <a href="criar-municipio.html" class="nav-link">
+                <i class="material-icons">location_city</i> Criar Municípios
+            </a>
+            <a href="criar-categoria.html" class="nav-link">
+                <i class="material-icons">category</i> Criar Categorias
+            </a>
+            <a href="listar-espacos.html" class="nav-link">
+                <i class="material-icons">list_alt</i> Listar Espaços
+            </a>
+            <a href="listar-donos.html" class="nav-link">
+                <i class="material-icons">people</i> Listar Donos
+            </a>
+            <a href="perfil-admin.html" class="nav-link">
+                <i class="material-icons">person</i> Perfil
+            </a>
+            <a href="#" class="nav-link" onclick="logout()">
+                <i class="material-icons">logout</i> Sair
+            </a>
+        </nav>
+    </div>
+
+    <div class="admin-main">
+        <header class="admin-header">
+            <div class="container-fluid">
+                <h1>Criar Província</h1>
+                <p>Adicionar nova província ao sistema</p>
+            </div>
+        </header>
+
+        <section class="form-section py-4">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="form-section">
+                            <h4>Informações da Província</h4>
+                            <form id="provinceForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nome da Província</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="code" class="form-label">Código</label>
+                                    <input type="text" class="form-control" id="code" maxlength="2" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Descrição</label>
+                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-select" id="status">
+                                        <option value="active">Ativo</option>
+                                        <option value="inactive">Inativo</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="material-icons">save</i>
+                                    Criar Província
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="list-section py-4">
+            <div class="container-fluid">
+                <h4>Províncias Existentes</h4>
+                <div class="admin-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Código</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="provincesList">
+                            <!-- Províncias serão carregadas dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

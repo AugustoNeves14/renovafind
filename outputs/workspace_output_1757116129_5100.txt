@@ -1,0 +1,11 @@
+npm warn "react-ts" is being parsed as a normal command line argument.
+npm warn Unknown cli config "--template". This will stop working in the next major version of npm.
+npm warn exec The following package was not found and will be installed: create-vite@7.1.1
+
+> npx
+> "create-vite" encontre-aqui-pro react-ts
+
+[?25l│
+◆  Select a framework:
+│
+└

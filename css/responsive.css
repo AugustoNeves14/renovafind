@@ -1,0 +1,250 @@
+/* ===================================
+   ENCONTRE AQUI - CSS RESPONSIVO
+   =================================== */
+
+/* Mobile First - Extra Small Devices */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .card-3d {
+        margin-bottom: 1rem;
+    }
+    
+    .card-img-top {
+        height: 150px;
+    }
+    
+    .footer {
+        text-align: center;
+    }
+    
+    .btn-custom {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small Devices */
+@media (min-width: 577px) and (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .card-3d {
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-img-top {
+        height: 180px;
+    }
+}
+
+/* Medium Devices */
+@media (min-width: 769px) and (max-width: 992px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .card-img-top {
+        height: 200px;
+    }
+}
+
+/* Large Devices */
+@media (min-width: 993px) and (max-width: 1200px) {
+    .section-title {
+        font-size: 2.4rem;
+    }
+}
+
+/* Extra Large Devices */
+@media (min-width: 1201px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+/* Navbar Responsiva */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .navbar-nav .nav-link:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Cards Grid Responsiva */
+@media (max-width: 576px) {
+    .row-cols-1 > * {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .row-cols-md-2 > * {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 769px) {
+    .row-cols-lg-3 > * {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Search Bar Responsiva */
+@media (max-width: 576px) {
+    .search-container {
+        flex-direction: column;
+    }
+    
+    .search-input {
+        margin-bottom: 0.5rem;
+    }
+    
+    .filter-buttons {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+/* Modal Responsiva */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .modal-content {
+        border-radius: 10px;
+    }
+}
+
+/* Footer Responsivo */
+@media (max-width: 768px) {
+    .footer .row > div {
+        margin-bottom: 2rem;
+    }
+    
+    .footer h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Loading Spinner Responsivo */
+@media (max-width: 576px) {
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Tablet Landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .card-img-top {
+        height: 160px;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+    .navbar {
+        padding: 0.5rem 0;
+    }
+    
+    .main-content {
+        margin-top: 70px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .footer,
+    .btn-custom,
+    .auth-options {
+        display: none;
+    }
+    
+    .card-3d {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .card-img-top {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --branco-fundo: #1a1a1a;
+        --preto-destaque: #ffffff;
+        --cinza-texto: #cccccc;
+    }
+    
+    body {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    
+    .card-3d {
+        background: #2a2a2a;
+        color: #ffffff;
+    }
+    
+    .navbar {
+        background: #1a1a1a;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .card-3d,
+    .btn-custom,
+    .fade-in {
+        transition: none;
+    }
+}
+
+/* Focus Visible */
+:focus-visible {
+    outline: 2px solid var(--vermelho-tags);
+    outline-offset: 2px;
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .card-3d:hover {
+        transform: none;
+    }
+    
+    .btn-custom:hover {
+        transform: none;
+    }
+}

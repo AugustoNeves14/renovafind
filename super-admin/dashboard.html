@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Super Admin - Encontre Aqui</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            <h4><i class="material-icons">admin_panel_settings</i> Super Admin</h4>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link active">
+                <i class="material-icons">dashboard</i>
+                Dashboard
+            </a>
+            <a href="criar-provincia.html" class="nav-link">
+                <i class="material-icons">add_location</i>
+                Criar Províncias
+            </a>
+            <a href="criar-municipio.html" class="nav-link">
+                <i class="material-icons">location_city</i>
+                Criar Municípios
+            </a>
+            <a href="criar-categoria.html" class="nav-link">
+                <i class="material-icons">category</i>
+                Criar Categorias
+            </a>
+            <a href="listar-espacos.html" class="nav-link">
+                <i class="material-icons">list_alt</i>
+                Listar Espaços
+            </a>
+            <a href="listar-donos.html" class="nav-link">
+                <i class="material-icons">people</i>
+                Listar Donos
+            </a>
+            <a href="perfil-admin.html" class="nav-link">
+                <i class="material-icons">person</i>
+                Perfil
+            </a>
+            <a href="#" class="nav-link" onclick="logout()">
+                <i class="material-icons">logout</i>
+                Sair
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h1>Dashboard</h1>
+                        <p class="text-muted">Visão geral do sistema</p>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-danger">
+                            <i class="material-icons">refresh</i>
+                            Atualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <section class="stats-section py-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="stats-label">Total de Espaços</h6>
+                                    <h3 class="stats-number counter" data-target="1250">0</h3>
+                                </div>
+                                <div class="stats-icon">
+                                    <i class="material-icons text-primary">store</i>
+                                </div>
+                            </div>
+                            <small class="text-success">
+                                <i class="material-icons">trending_up</i>
+                                +15.3% este mês
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="stats-label">Espaços Ativos</h6>
+                                    <h3 class="stats-number counter" data-target="1180">0</h3>
+                                </div>
+                                <div class="stats-icon">
+                                    <i class="material-icons text-success">check_circle</i>
+                                </div>
+                            </div>
+                            <small class="text-success">
+                                <i class="material-icons">trending_up</i>
+                                +12.5% este mês
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="stats-label">Donos de Espaços</h6>
+                                    <h3 class="stats-number counter" data-target="450">0</h3>
+                                </div>
+                                <div class="stats-icon">
+                                    <i class="material-icons text-info">people</i>
+                                </div>
+                            </div>
+                            <small class="text-success">
+                                <i class="material-icons">trending_up</i>
+                                +8.2% este mês
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="stats-label">Avaliações</h6>
+                                    <h3 class="stats-number counter" data-target="8900">0</h3>
+                                </div>
+                                <div class="stats-icon">
+                                    <i class="material-icons text-warning">star</i>
+                                </div>
+                            </div>
+                            <small class="text-success">
+                                <i class="material-icons">trending_up</i>
+                                +22.1% este mês
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section py-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <h4>Crescimento de Estabelecimentos</h4>
+                            <canvas id="growthChart" height="300"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="chart-container">
+                            <h4>Categorias</h4>
+                            <canvas id="categoriesChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity-section py-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Atividades Recentes</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <i class="material-icons text-success">add_circle</i>
+                                        <div>
+                                            <p><strong>Restaurante Sabor Brasileiro</strong> foi adicionado</p>
+                                            <small class="text-muted">Há 2 horas</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <i class="material-icons text-primary">edit</i>
+                                        <div>
+                                            <p><strong>Lanchonete Doce Sabor</strong> foi atualizado</p>
+                                            <small class="text-muted">Há 4 horas</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-item">
+                                        <i class="material-icons text-danger">delete</i>
+                                        <div>
+                                            <p><strong>Bar do Zé</strong> foi removido</p>
+                                            <small class="text-muted">Há 6 horas</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Estatísticas Rápidas</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="stat-item">
+                                    <span class="stat-label">Média de Avaliação</span>
+                                    <span class="stat-value">4.6</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Visitas Diárias</span>
+                                    <span class="stat-value">2.5k</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Taxa de Conversão</span>
+                                    <span class="stat-value">12%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions py-4">
+            <div class="container-fluid">
+                <h4>Ações Rápidas</h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="btn btn-primary w-100" onclick="window.location.href='criar-provincia.html'">
+                            <i class="material-icons">add_location</i>
+                            Nova Província
+                        </button>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <button class="btn btn-success w-100" onclick="window.location.href='criar-municipio.html'">
+                            <i class="material-icons">location_city</i>
+                            Novo Município
+                        </button>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <button class="btn btn-info w-100" onclick="window.location.href='criar-categoria.html'">
+                            <i class="material-icons">category</i>
+                            Nova Categoria
+                        </button>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <button class="btn btn-warning w-100" onclick="window.location.href='listar-espacos.html'">
+                            <i class="material-icons">list</i>
+                            Ver Espaços
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading -->
+    <div id="adminLoading" style="display: none;">
+        <div class="loading-overlay">
+            <div class="loading"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>
