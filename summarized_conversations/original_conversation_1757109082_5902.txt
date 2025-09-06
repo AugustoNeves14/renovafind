@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "Now let's install Bootstrap 5 and other frontend dependencies for our Angular project:\n\n<function_calls>\n<execute-command>\ncd angocine/frontend/angocine && npm install bootstrap @popperjs/core hls.js @fortawesome/fontawesome-free ngx-bootstrap\n</execute-command>\n</function_calls>"}

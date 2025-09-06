@@ -1,1 +1,0 @@
-{'role': 'user', 'content': '<tool_result> <create-file> ToolResult(success=True, output="File \'angocine/frontend/angocine/src/app/components/rating-stars/rating-stars.component.scss\' created successfully.") </create-file> </tool_result>'}

@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "Let's install development dependencies for the backend:\n\n<function_calls>\n<execute-command>\ncd angocine/backend && npm install --save-dev nodemon jest supertest eslint prettier\n</execute-command>\n</function_calls>"}

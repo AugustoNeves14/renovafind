@@ -1,1 +1,0 @@
-{'role': 'user', 'content': '<tool_result> <execute-command> ToolResult(success=True, output=\'{\\n  "output": "\\\\nadded 6 packages, and audited 707 packages in 2s\\\\n\\\\n122 packages are looking for funding\\\\n  run `npm fund` for details\\\\n\\\\nfound 0 vulnerabilities\\\\n",\\n  "exit_code": 0,\\n  "cwd": "/workspace"\\n}\') </execute-command> </tool_result>'}

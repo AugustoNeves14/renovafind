@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "Let's create the admin page subfolders:\n\n<function_calls>\n<execute-command>\ncd angocine/frontend/angocine && mkdir -p src/app/pages/admin/{dashboard,users,movies,reviews,analytics}\n</execute-command>\n</function_calls>"}

@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': "Now I'll create the Angular project using the Angular CLI. Let's set up the project with routing and SCSS for styling:\n\n<function_calls>\n<execute-command>\ncd angocine/frontend && npx ng new angocine --routing=true --style=scss --skip-git --skip-tests\n</execute-command>\n</function_calls>"}
